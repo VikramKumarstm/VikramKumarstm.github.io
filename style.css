@@ -1,9 +1,1 @@
-body {
-    background-color: darkblue;
-}
 
-@media (max-width: 991px) {
-    .sidebar {
-        background-color: yellowgreen;
-    }
-}
