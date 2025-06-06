@@ -1,74 +1,71 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Bootstrap demo</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" 
-    rel="stylesheet"integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" 
-    crossorigin="anonymous">
-    <link rel="stylesheet" href="style.css">
-  </head>
-  <body vh-100 overflow-hidden>
+<head>
+  <meta charset="UTF-8">
+  <title>Vikram First ebook</title>
+  <style>
+    body {
+      margin: 0;
+      background: #f2f2f2;
+      font-family: sans-serif;
+      overflow: hidden;
+    }
 
-    <!-- navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-transparent">
-        <div class="container">
+    .pdf-container {
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+      position: relative;
+    }
 
-            <!-- logo -->
-          <a class="navbar-brand fs-4 " href="#">Coding Karo</a>
+    iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
 
-          <!-- Toggle Btn -->
-          <button class="navbar-toggler shadow-none border-0" type="button" data-bs-toggle="offcanvas"
-           data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
+    /* Optional overlay for download-block (can be removed if not needed) */
+    .top-overlay {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%;
+      height: 40px;
+      background: rgba(255,255,255,0.01); /* minimal transparent */
+      z-index: 5;
+    }
+  </style>
+</head>
+<body oncontextmenu="return false" onkeydown="return false">
 
-          <!-- Sidebar -->
-          <div class="sidebar offcanvas offcanvas-start " tabindex="-1" id="offcanvasNavbar"
-           aria-labelledby="offcanvasNavbarLabel">
+  <div class="pdf-container">
+    <iframe src="book.pdf#toolbar=0&navpanes=0&scrollbar=0" allow="fullscreen"></iframe>
+    <div class="top-overlay"></div>
+  </div>
 
-            <!-- Sidebar header -->
-            <div class="text-white border-bottom offcanvas-header">
-              <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Coding Karo</h5>
-              <button type="button" class="btn-close btn-close-white shadow-none " 
-              data-bs-dismiss="offcanvas" aria-label="Close" ></button>
-            </div>
+  <script>
+    // Disable key combos like Ctrl+S, Ctrl+P, F12 etc.
+    document.addEventListener("keydown", function (e) {
+      if (
+        (e.ctrlKey && ["s", "p", "u"].includes(e.key.toLowerCase())) ||
+        e.key === "F12"
+      ) {
+        e.preventDefault();
+        alert("This action is disabled.");
+      }
+    });
 
-            <!-- Sidebar body -->
-            <div class="offcanvas-body d-flex flex-lg-row justify-content-center flex-column p-lg-0  p-4">
-              <ul class="navbar-nav justify-content-center align-items-center flex-grow-1 pe-3">
-                <li class="nav-item max-2">
-                  <a class="nav-link active" aria-current="page" href="#home">Home</a>
-                </li>
-                <li class="nav-item mx-2 ">
-                  <a class="nav-link" href="#about">About</a>
-                </li>
-                <li class="nav-item mx-2 ">
-                    <a class="nav-link" href="#courses">Courses</a>
-                </li>
-                <li class="nav-item mx-2 ">
-                    <a class="nav-link" href="#contact">Contact</a>
-                </li>
-              </ul>
+    // Optional: Disable copy
+    document.addEventListener("copy", (e) => e.preventDefault());
 
-              <!-- login/signUp -->
-
-              <div class="d-flex flex-lg-row justify-content-center align-items-center  gap-3">
-                <a href="#logni" class="text-white">login</a>
-                <a href="#signup" class="text-white text-decoration-none px-3 py-1 rounded-4 bg-info ">signUp</a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </nav>
-
-      <main>
-        <section class="w-100 vh-100 d-flex flex-column justify-content-center align-items-center text-white">
-            <h1 style="font-size: 2.5em;">Responsive Navbar</h1>
-            <h1 style="font-size: 2.1em;">BootSrtap 5</h1>
-        </section>
-      </main>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-  </body>
+    // Optional: Blur on Print Screen key (simulation only)
+    document.addEventListener('keyup', function (e) {
+      if (e.key === 'PrintScreen') {
+        document.querySelector('.pdf-container').style.filter = "blur(10px)";
+        setTimeout(() => {
+          document.querySelector('.pdf-container').style.filter = "none";
+        }, 2000);
+      }
+    });
+  </script>
+</body>
 </html>
